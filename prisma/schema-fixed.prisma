@@ -1,0 +1,95 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  name      String
+  role      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Связи
+  scheduleItems ScheduleItem[]
+  grades        Grade[]
+  requests      Request[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model ScheduleItem {
+  id          String    @id @default(cuid())
+  time        String
+  subject     String
+  type        String
+  teacher     String
+  classroom   String
+  building    String
+  date        DateTime
+  status      String    @default("LESSON")
+  notes       String?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("schedule_items")
+}
+
+model Grade {
+  id        String     @id @default(cuid())
+  subject   String
+  score     Float
+  maxScore  Float
+  status    String
+  examDate  DateTime?
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("grades")
+}
+
+model Request {
+  id          String       @id @default(cuid())
+  type        String
+  status      String
+  comment     String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  processedAt DateTime?
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("requests")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  title     String
+  message   String
+  read      Boolean          @default(false)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// Типы для справочников
+// UserRole: STUDENT | EMPLOYEE
+// LessonType: LECTURE | PRACTICE | LAB | SEMINAR
+// ScheduleStatus: LESSON | MOVED | CANCELLED
+// GradeStatus: NOT_STARTED | IN_PROGRESS | PASSED | FAILED
+// RequestType: CERTIFICATE_STUDY | CERTIFICATE_MILITARY | FINANCIAL_AID | TRANSFER_TO_BUDGET
+// RequestStatus: ACCEPTED | PROCESSING | READY | REJECTED
