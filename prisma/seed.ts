@@ -39,9 +39,9 @@ async function main() {
 
   const korsakova = await prisma.user.create({
     data: {
-      username: 'korsakova',
+      username: 'ivanov',
       password: passwordHash,
-      name: 'Корсакова Анастасия',
+      name: 'Иванов Иван',
       role: 'STUDENT',
     },
   });

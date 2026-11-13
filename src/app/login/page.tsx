@@ -73,7 +73,7 @@ export default function LoginPage() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="pl-10 w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[44px]"
-                    placeholder="Например: korsakova"
+                    placeholder="Например: user"
                     required
                   />
                 </div>

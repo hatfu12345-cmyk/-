@@ -29,8 +29,8 @@ const DEMO_USERS = [
     badge: 'Методист',
   },
   {
-    username: 'korsakova',
-    name: 'Корсакова Анастасия',
+    username: 'ivanon',
+    name: 'Иванов Иван',
     role: 'Студент • 2 курс, ЦТ-21',
     badge: 'Личный Face ID',
   },

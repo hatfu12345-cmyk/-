@@ -17,7 +17,7 @@ const REQUEST_TYPES = [
   { value: 'CERTIFICATE_STUDY', label: 'Справка об обучении' },
   { value: 'MILITARY_OFFICE', label: 'Справка для военкомата (риложение 4)' },
   { value: 'TUITION_RECEIPT', label: 'Составление квитанции на оплату обучения' },
-  { value: 'FINANCIAL_AID', label: 'аявление на материальную помощь' },
+  { value: 'FINANCIAL_AID', label: 'Заявление на материальную помощь' },
 ];
 
 export default function RequestsPage() {
